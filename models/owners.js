@@ -1,8 +1,32 @@
-const createOwner = (data, cb) => {};
+const fs = require("fs");
 
-const fetchAllOwners = (cb) => {};
+const createOwner = (data, cb) => {
+  data.id = "o" + Date.now();
+  fs.writeFile(`./data/owners/${data.id}.json`, JSON.stringify(data), (err) => {
+    if (err) cb(err);
+    else cb(null, data);
+  });
+};
 
-const fetchOwnerById = (id, cb) => {};
+const fetchAllOwners = (cb) => {
+  let allOwners = [];
+  fs.readdir("./data/owners", (err, files) => {
+    files.forEach((file) => {
+      fs.readFile(`./data/owners/${file}`, "utf8", (err, owner) => {
+        allOwners.push(JSON.parse(owner));
+        if (err) cb(err);
+        else if (allOwners.length === files.length) cb(null, allOwners);
+      });
+    });
+  });
+};
+
+const fetchOwnerById = (id, cb) => {
+  fs.readFile(`./data/owners/${id}.json`, "utf8", (err, owner) => {
+    if (err) cb(err);
+    else cb(null, owner);
+  });
+};
 
 const updateOwner = (id, data, cb) => {};
 
