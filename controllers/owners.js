@@ -19,6 +19,9 @@ const getOwnerById = (request, response, next) => {
   const { id } = request.params;
   fetchOwnerById(id, (err, owner) => {
     if (err) next(err);
+    // if (err) {
+    //   response.status(404).send({ err });
+    // }
     else {
       response.status(200).send(owner);
     }
