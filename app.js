@@ -1,9 +1,6 @@
-const {
-  getAllOwners,
-  getOwnerById,
-  fetchPetById,
-  getPetsByOwnerId,
-} = require("./controllers/owners");
+const { getAllOwners, getOwnerById } = require("./controllers/owners");
+
+const { getPetById, getPetsByOwnerId } = require("./controllers/pets");
 
 const express = require("express");
 const app = express();
@@ -21,7 +18,7 @@ app.get("/api/owners/:id", (request, response) => {
 });
 
 app.get("/api/pets/:id", (request, response) => {
-  fetchPetById(request, response);
+  getPetById(request, response);
 });
 
 app.get("/api/pets/:id", (request, response) => {

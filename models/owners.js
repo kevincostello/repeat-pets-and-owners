@@ -21,6 +21,7 @@ const fetchAllOwners = (cb) => {
   });
 };
 
+// id is a param, cb is a passed a function from the controller
 const fetchOwnerById = (id, cb) => {
   fs.readFile(`./data/owners/${id}.json`, "utf8", (err, owner) => {
     if (err) cb(err);
